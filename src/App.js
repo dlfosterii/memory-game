@@ -1,28 +1,45 @@
 import React from 'react';
-
 import Card from './components/Card';
+import MemoryCard from './components/MemoryCard'
 
 import './App.css';
 
 function App() {
-  const projects = [
-    { name: 'Project Awesome', likes: 10},
-    { name: 'Project Amazing', likes: 1},
-    { name: 'The Real Project Awesome',likes: 5},
-    { name: 'Final Project Awesome',likes: 10000},
-  ]
 
   return (
     <div className="App">
-      {projects.map((project, index) => {
-        return <Card 
-        name={project.name} 
-        key={index}
-        likes={project.likes}
-        ></Card>
-      })}
+      <header className="App-header">
+      <h1>Memory Game</h1>
+      <h4 className="subHeader" >Match cards to win</h4>
+      </header>
+    <div>
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+    </div>
+    <div>
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+    </div>
+    <div>
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+    </div>
+    <div>
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+      <MemoryCard />
+    </div>
+
     </div>
   );
 }
+
 
 export default App;

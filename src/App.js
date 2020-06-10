@@ -5,7 +5,7 @@ import MemoryCard from './components/MemoryCard'
 import './App.css';
 import { render } from '@testing-library/react';
 
-//part 3, step 1, 1)
+//part 3, step 1, 7)
 function generateDeck() {
   const symbols = ['∆', 'ß', '£', '§', '•', '$', '+', 'ø'];
   let deck = [];
@@ -16,9 +16,20 @@ function generateDeck() {
     }
     )
   }
-  return deck
+  return (shuffle(deck))
 };
 
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 
 
@@ -26,7 +37,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      deck: [],
+      deck: [generateDeck()],
       pickedCards: [],    
     }
   }

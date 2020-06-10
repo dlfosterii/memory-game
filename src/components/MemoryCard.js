@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './MemoryCard.css';
 import Logo from '../logo-wrench-white.png';
 
 
 
-class MemoryCard extends Component {
+class MemoryCard extends React.Component {
     constructor(props) {
         super();
         this.state = { isFlipped: false };

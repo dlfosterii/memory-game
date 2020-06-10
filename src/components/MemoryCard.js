@@ -6,7 +6,7 @@ import Logo from '../logo-wrench-white.png';
 
 class MemoryCard extends React.Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = { isFlipped: false };
 
     }
@@ -23,7 +23,7 @@ class MemoryCard extends React.Component {
 
     render() {
         let innerClass = "MemoryCard_inner";
-        if (this.state.isFlipped){
+        if (this.props.isFlipped){
             innerClass += " Flipped"
         };      
         return (
@@ -32,7 +32,7 @@ class MemoryCard extends React.Component {
                     <div className="MemoryCard_back">
                         <img src={Logo} alt=""></img>
                     </div>
-                    <div className="MemoryCard_front">∆</div>
+        <div className="MemoryCard_front">{this.props.symbol}</div>
                 </div>
             </div>
         )

@@ -45,7 +45,7 @@ class App extends Component {
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
-      return <MemoryCard />
+      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} card/>
     });
 
     return (
@@ -58,13 +58,10 @@ class App extends Component {
           {cardsJSX.slice(0, 4)}
         </div>
         <div>
-
           {cardsJSX.slice(4, 8)}
         </div>
         <div>
-
           {cardsJSX.slice(8, 12)}
-
         </div>
         <div>
           {cardsJSX.slice(12, 16)}

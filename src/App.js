@@ -35,18 +35,18 @@ function pickCard(cardIndex) {
   if (this.state.deck[cardIndex]) {
     return
   };
-  let cardToFlip = {...this.state.deck[cardIndex]};
+  let cardToFlip = { ...this.state.deck[cardIndex] };
   cardToFlip = {
     isFlipped: true
   };
   let newPickedCards = this.state.pickedCards.concat(cardIndex);
-  let newDeck = this.state.deck.map((card, index) =>{
-    if (cardIndex === index){
+  let newDeck = this.state.deck.map((card, index) => {
+    if (cardIndex === index) {
       return cardToFlip
     }
     return card
   });
-return this.setState( {deck: newDeck, pickedCards: newPickedCards})
+  return this.setState({ deck: newDeck, pickedCards: newPickedCards })
 };
 
 
@@ -60,7 +60,7 @@ class App extends Component {
     }
   }
 
-  pickCard (cardIndex) {
+  pickCard(cardIndex) {
     if (this.state.deck[cardIndex].isFlipped) {
       return
     };
@@ -79,7 +79,7 @@ class App extends Component {
       const card1 = newDeck[card1Index];
       const card2 = newDeck[card2Index];
       if (card1.symbol !== card2.symbol) {
-        //un-flip cards
+        this.unflipCards(card1Index, card2Index)
         console.log('cards don\'t match')
       }
       newPickedCards = []
@@ -88,13 +88,31 @@ class App extends Component {
     return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
   };
 
+  unflipCards(card1Index, card2Index) {
+    const card1 = {...this.state.deck[card1Index]};
+    const card2 = {...this.state.deck[card2Index]};
+    card1.isFlipped = false;
+    card2.isFlipped = false;
+    const newDeck = this.state.deck.map((card, index) => {
+      if (card1Index === index){
+        return card1
+      }
+      if (card2Index === index){
+        return card2
+      }
+      return card
+    })
+    this.setState({deck: newDeck})
+  }
+
+
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
       return <MemoryCard
         symbol={card.symbol}
         isFlipped={card.isFlipped}
         key={index}
-        pickCard={this.pickCard.bind(this, index)}/>
+        pickCard={this.pickCard.bind(this, index)} />
     });
 
     return (

@@ -31,6 +31,23 @@ function shuffle(a) {
   return a;
 }
 
+function pickCard(cardIndex) {
+  if (this.state.deck[cardIndex].is) {
+    return
+  };
+  let cardToFlip = { ...this.state.deck[cardIndex] };
+  cardToFlip = {
+    isFlipped: true
+  };
+  let newPickedCards = this.state.pickedCards.concat(cardIndex);
+  let newDeck = this.state.deck.map((card, index) => {
+    if (cardIndex === index) {
+      return cardToFlip;
+    }
+    return card;
+  });
+  return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
+};
 
 
 class App extends Component {
@@ -45,7 +62,11 @@ class App extends Component {
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
-      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} key={index} card/>
+      return <MemoryCard
+        symbol={card.symbol}
+        isFlipped={card.isFlipped}
+        key={index}
+        pickCard={this.pickCard.bind(this, index)} card />
     });
 
     return (

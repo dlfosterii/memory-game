@@ -73,6 +73,18 @@ class App extends Component {
       }
       return card;
     });
+    if (newPickedCards.length === 2) {
+      const card1Index = newPickedCards[0];
+      const card2Index = newPickedCards[1];
+      const card1 = newDeck[card1Index];
+      const card2 = newDeck[card2Index];
+      if (card1.symbol !== card2.symbol) {
+        //un-flip cards
+        console.log('cards don\'t match')
+      }
+      newPickedCards = []
+    }
+    console.log(newPickedCards)
     return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
   };
 

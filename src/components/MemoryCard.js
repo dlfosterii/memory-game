@@ -5,19 +5,6 @@ import Logo from '../logo-wrench-white.png';
 
 
 class MemoryCard extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { isFlipped: false };
-    // }
-
-    // clickHandler = () => {
-    //     this.setState({ isFlipped: !this.state.isFlipped }
-    //         ,() => {
-    //             console.log(this.state)
-    //         });
-    //     // alert('card clicked:', this);
-    // }
-
 
 
     render() {

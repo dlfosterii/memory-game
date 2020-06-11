@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import MemoryCard from './components/MemoryCard'
 
 import './App.css';
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 
 //part 3, step 1, 7)
 function generateDeck() {
@@ -31,23 +31,7 @@ function shuffle(a) {
   return a;
 }
 
-function pickCard(cardIndex) {
-  if (this.state.deck[cardIndex].is) {
-    return
-  };
-  let cardToFlip = { ...this.state.deck[cardIndex] };
-  cardToFlip = {
-    isFlipped: true
-  };
-  let newPickedCards = this.state.pickedCards.concat(cardIndex);
-  let newDeck = this.state.deck.map((card, index) => {
-    if (cardIndex === index) {
-      return cardToFlip;
-    }
-    return card;
-  });
-  return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
-};
+
 
 
 class App extends Component {
@@ -59,6 +43,21 @@ class App extends Component {
     }
   }
 
+  pickCard (cardIndex) {
+    if (this.state.deck[cardIndex].isFlipped) {
+      return
+    };
+    let cardToFlip = { ...this.state.deck[cardIndex] };
+    cardToFlip.isFlipped = true;
+    let newPickedCards = this.state.pickedCards.concat(cardIndex);
+    let newDeck = this.state.deck.map((card, index) => {
+      if (cardIndex === index) {
+        return cardToFlip;
+      }
+      return card;
+    });
+    return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
+  };
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
@@ -66,7 +65,7 @@ class App extends Component {
         symbol={card.symbol}
         isFlipped={card.isFlipped}
         key={index}
-        pickCard={this.pickCard.bind(this, index)} card />
+        pickCard={this.pickCard.bind(this, index)}/>
     });
 
     return (

@@ -99,11 +99,11 @@ class App extends Component {
   }
 
   handleClick = () => {
-    this.setState({ 
+    this.setState({
       deck: generateDeck(),
       pickedCards: [],
       won: false,
-    }) 
+    })
   }
 
   render() {
@@ -135,7 +135,7 @@ class App extends Component {
         </div>
         <div className="resetButton">
           <br />
-          { this.state.won && <button onClick={ this.handleClick }>Replay</button> } 
+          {this.state.won && <button onClick={this.handleClick}>Replay</button>}
         </div>
       </div>
     );

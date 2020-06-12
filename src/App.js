@@ -4,7 +4,7 @@ import MemoryCard from './components/MemoryCard'
 import './App.css';
 
 
-//part 3, step 1, 7)
+//part 3, step 1, 7) create a deck of symbol cards and shuffle them
 function generateDeck() {
   const symbols = ['∆', 'ß', '£', '§', '•', '$', '+', 'ø'];
   let deck = [];
@@ -37,6 +37,7 @@ class App extends Component {
     this.state = {
       deck: generateDeck(),
       pickedCards: [],
+      won: false,
     }
   }
 
@@ -59,7 +60,7 @@ class App extends Component {
       const card1 = newDeck[card1Index];
       const card2 = newDeck[card2Index];
       if (card1.symbol !== card2.symbol) {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.unflipCards(card1Index, card2Index)
         }, 1000)
         console.log('cards don\'t match')
@@ -67,26 +68,43 @@ class App extends Component {
       newPickedCards = []
     }
     console.log(newPickedCards)
-    return (this.setState({ deck: newDeck, pickedCards: newPickedCards }));
+    this.setState({ deck: newDeck, pickedCards: newPickedCards })
+
+    this.gameOver(newDeck)
   };
 
   unflipCards(card1Index, card2Index) {
-    const card1 = {...this.state.deck[card1Index]};
-    const card2 = {...this.state.deck[card2Index]};
+    const card1 = { ...this.state.deck[card1Index] };
+    const card2 = { ...this.state.deck[card2Index] };
     card1.isFlipped = false;
     card2.isFlipped = false;
     const newDeck = this.state.deck.map((card, index) => {
-      if (card1Index === index){
+      if (card1Index === index) {
         return card1
       }
-      if (card2Index === index){
+      if (card2Index === index) {
         return card2
       }
       return card
     })
-    this.setState({deck: newDeck})
+    this.setState({ deck: newDeck })
   }
 
+  gameOver(deck) {
+    if (deck.filter((card) => {
+      return !card.isFlipped;
+    }).length === 0) {
+      this.setState({ won: true });
+    }
+  }
+
+  handleClick = () => {
+    this.setState({ 
+      deck: generateDeck(),
+      pickedCards: [],
+      won: false,
+    }) 
+  }
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
@@ -114,6 +132,10 @@ class App extends Component {
         </div>
         <div>
           {cardsJSX.slice(12, 16)}
+        </div>
+        <div className="resetButton">
+          <br />
+          { this.state.won && <button onClick={ this.handleClick }>Replay</button> } 
         </div>
       </div>
     );
